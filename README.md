@@ -12,7 +12,7 @@ https://github.com/derailed-dash/hugo
 
 This is a modified Docker container image, based on the Alpine klakegg/hugo.
 
-It contains a docker-compose.yml for building the image from the Dockerfile, and launching the Huge server.
+It contains a docker-compose.yml for building the image from the Dockerfile, and launching the Hugo server.
 
 ## Usage Instructions
 
