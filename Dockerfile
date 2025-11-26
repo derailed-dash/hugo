@@ -1,4 +1,4 @@
-FROM klakegg/hugo:0.92.2-alpine
+FROM klakegg/hugo:0.111.3-alpine
 
 # To avoid "Failed to read Git log: fatal: unsafe repository" issue
 RUN apk add git
