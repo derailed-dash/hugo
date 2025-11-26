@@ -1,53 +1,57 @@
-# Dazbo's Hugo
+# Dockerized Hugo Environment
 
-## Tagline
+## What is Hugo?
 
-A Hugo image with git pre-installed.
+Hugo is a popular open-source static site generator written in Go. It is known for its incredible speed and flexibility. Unlike dynamic site generators (like WordPress) which build a page every time a visitor requests it, static site generators build the pages once, ahead of time. This results in faster loading times, improved security, and simpler hosting.
 
-## GitHub
+Hugo is a great choice for:
 
-https://github.com/derailed-dash/hugo
+*   Blogs
+*   Documentation websites
+*   Portfolios
+*   Landing pages
 
-## Overview
+## Why Use This Dockerized Environment?
 
-This is a modified Docker container image, based on the Alpine klakegg/hugo.
+This repository provides a convenient and portable Docker-based environment for developing and building Hugo websites. The key benefits are:
 
-It contains a docker-compose.yml for building the image from the Dockerfile, and launching the Hugo server.
+*   **Consistency:** Ensures that you and your team are using the same version of Hugo and its dependencies, regardless of your local machine's setup.
+*   **Isolation:** The entire environment is containerized, so it won't interfere with other projects or software on your system.
+*   **Portability:** You can easily share and run this environment on any machine with Docker installed.
+*   **Git Included:** This image comes with `git` pre-installed, which is useful for themes and version control.
+
+This project is based on the `klakegg/hugo:0.111.3-alpine` image, providing a minimal and up-to-date Hugo setup.
 
 ## Usage Instructions
 
-### Updating and Serving
+### Building and Serving Locally
 
-Simply launch the container as follows:
-
-```bash
-docker compose up
-```
-
-Note that this configuration monitors for changes and automatically updates the site content.
-
-### To Run Container Interactively
-
-If you want to interactively work with the container (e.g. for debugging):
+To build the Docker image and start the Hugo development server, run:
 
 ```bash
-docker run --rm -it --entrypoint /bin/sh -v $(pwd):/src -p 1313:1313 hugo-engine:0.1
+docker compose up --build
 ```
 
-(Use `${pwd}` in Powershell.)
+Your site will be available at `http://localhost:1313`. The server will automatically watch for changes in your content and rebuild the site.
 
-### To Run a Build
+### Running Commands Interactively
 
-We can perform a one-off build to generate the output:
+To run commands inside the container, such as `hugo new site .`, you can start an interactive shell:
 
 ```bash
-docker run --rm -it -v $(pwd):/src hugo-engine:0.1
+docker run --rm -it --entrypoint /bin/sh -v $(pwd):/src -p 1313:1313 hugo-engine:1.0
+```
+*(Use `${pwd}` instead of `$(pwd)` in Powershell.)*
+
+### Performing a One-Off Build
+
+To generate your static site into the `public` directory without starting the server:
+
+```bash
+docker run --rm -it -v $(pwd):/src hugo-engine:1.0
 ```
 
-By default, the data in the mapped volume (`/src`) is used to build the output in a folder called `public`.
-
-Alternatively, from the interactive container, we can simply run the following, in order to build from the current directory:
-
+Inside the interactive container, you can also run the build command directly:
 ```bash
 hugo -s .
 ```

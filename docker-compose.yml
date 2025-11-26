@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: hugo-engine:0.1
+    image: hugo-engine:1.0
     # Launch Hugo server, and watch for content changes
     command: server --buildDrafts --watch --poll 1s --source src/
     volumes:
